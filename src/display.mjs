@@ -29,7 +29,7 @@ export class Display {
      */
     static get_output(last_floor, next_floor, total_travel_time, floors_visited) {
         const indicator = Display.get_indicator(last_floor, next_floor);
-        return `${indicator} time: ${total_travel_time}s\tfloors: ${floors_visited.join(', ')}`
+        return `${indicator}\tTime: ${total_travel_time}s\tFloors: ${floors_visited.join(', ')}`
     }
 
     static print_output(last_floor, next_floor, total_travel_time, floors_visited) {

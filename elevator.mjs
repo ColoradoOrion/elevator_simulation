@@ -1,13 +1,16 @@
 
-import { MyConfig } from './config.mjs';
-import { Display  } from './display.mjs'; 
+import { MyConfig } from './src/config.mjs';
+import { Display } from './src/display.mjs';
+
+import keypress from 'keypress';
+
 // state
 // arriving
 // departing
 // travelling
 
 
-
+keypress(process.stdin);
 //----------------------------------------------
 
 let last_floor = 1;
@@ -17,6 +20,15 @@ let total_travel_time = 0;
 
 (async function run_simulation() {
 
+    process.stdin.on('keypress', (ch, key) => {
+        console.log('\nAborting simulation...');
+        process.exit();
+    });
+    if (process.stdin.isTTY) {
+        process.stdin.setRawMode(true);
+    }
+
+    process.stdin.resume();
     // Get config
 
     // Validate config
@@ -29,6 +41,8 @@ let total_travel_time = 0;
     // floors are in bounds
     // start is an integer
     // start is in bounds
+
+
 
     floors_visited.push(last_floor);
 
@@ -43,10 +57,6 @@ let total_travel_time = 0;
         // door time open/close
 
         // we reached the floor
-
-
-        const next_direction = next_floor - last_floor;
-        const indicator = next_direction > 0 ? " ^ " : " v ";
 
         let travel_time_remaining = Math.abs(next_floor - last_floor) * MyConfig.TimeBetweenFloors;
 
@@ -72,4 +82,5 @@ let total_travel_time = 0;
 
     // we've reached the last floor
     console.log("\nSimulation complete");
+    process.stdin.pause();
 })();

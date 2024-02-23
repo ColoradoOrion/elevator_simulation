@@ -6,14 +6,14 @@ This is an elevator simulation that times an elevator car as it travels between 
 
 * NodeJS
 
-## Building and Running
+## Building
+1. Clone the project locally
+1. Install the dependencies with
 
-Clone the project. Install the dependencies with
+       npm install
 
-    npm install
-
-
-To run the program
+## Running the program
+From the command prompt, run
 
     npm elevator.js floors=<floors> start=[starting floor = 1]
 
@@ -34,16 +34,17 @@ Pressing any key will abort the simulation.
 | Indicator `[ ]` | Doors opening |
 | Indicator `^` | Car climbing |
 | Indicator `v` | Car descending |
+| Indicator `-` | Car stopped |
 | `elapsed travel time` | The travel time of the elevator car in seconds |
 | `floors visited` | A comma-separated list of floors that the elevator car has stopped at |
 
 ## Assumptions
-- The "simulation" is a realtime elevator experience i.e. we are not simply calculating the time travelled and a list of floors visited.
+- The "simulation" is a real time elevator experience i.e. we are not simply calculating the time travelled and displaying a list of floors visited.
 - Time between floors is 10 seconds.
-- Total time display is in seconds.
-    - Even with the time configurable, it is assumed that between-floor time would be in an even second increment.
+- The Total elapsed time display is in seconds.
+    - Even with the time configurable, it is assumed that between-floor time would be in an even second increment e.g., 8 seconds and not 8.2 seconds.
 - Floors must be specified numerically.
-- The first floor displayed in the output is the starting point of the car.
+- The starting floor is the first value listed in the "Floors" display.
 - If no starting floor is provided, the 1st floor is assumed.
 - Max and min floors are defined in the config. Entering floors above or below the bounds will fail the simluation.
 - Negative floors are okay as long as they're in bounds.
@@ -54,7 +55,7 @@ Pressing any key will abort the simulation.
 - It takes 4 seconds for the doors to open after the car arrives at a stop.
 - The doors are assumed to be opened at the beginning and end of the simulation.
 - Floors can be visited more than once.
-- If the same floor is provided consecutively, zero time is assumed. i.e. The doors do not open and close. Subsequent repeated floors are essentially skipped.
+- If the same floor is provided consecutively, zero time is assumed. i.e. The doors do not open and close. Subsequent identical floors are essentially skipped.
 - The elevator car accelerates to its top speed and comes to a stop instantaneously.
 - Passengers embark and disembark instantaneously.
 
