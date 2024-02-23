@@ -15,7 +15,7 @@ This is an elevator simulation that times an elevator car as it travels between 
 ## Running the program
 From the command prompt, run
 
-    npm elevator.js floors=<floors> start=[starting floor = 1]
+    node main.js floors=<floors> start=[starting floor = 1]
 
 | Parameter | Default | Description |
 |--------|-----------|---------|
@@ -30,11 +30,11 @@ Pressing any key will abort the simulation.
 
 | Output | Description |
 |--------|-----------|
-| Indicator `[]` |  Doors closing |
-| Indicator `[ ]` | Doors opening |
+| Indicator ` ><` |  Doors closing |
+| Indicator `< >` | Doors opening |
 | Indicator `^` | Car climbing |
 | Indicator `v` | Car descending |
-| Indicator `-` | Car stopped |
+| Indicator `[ ]` | Car stopped with doors open |
 | `elapsed travel time` | The travel time of the elevator car in seconds |
 | `floors visited` | A comma-separated list of floors that the elevator car has stopped at |
 

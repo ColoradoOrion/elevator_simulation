@@ -6,7 +6,7 @@ export class MyConfig {
     DoorCloseTime = 4;
     DoorOpenTime = 4;
 
-    TimeBetweenFloors = 2;
+    TimeBetweenFloors = 10;
 
-    static RunScale = .25; 
+    static TimeScale = .5; 
 }

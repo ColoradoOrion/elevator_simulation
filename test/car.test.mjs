@@ -1,20 +1,31 @@
-import { Car } from "../src/car.mjs";
-import { MyConfig } from "../src/config.mjs";
-import { assert } from 'chai';
+import { Car } from '../src/car.mjs'
+import { assert, expect } from 'chai';
+import { MyConfig } from '../src/config.mjs';
 
-const config = new MyConfig();
+describe('Display', () => {
 
-describe('Car', () => {
-    describe('Motion', () => {
-        it('should have door_open + 10 sec/floor + door_close time for travel', () => {
-            const car = new Car(1, 2, config);
-            assert.equal(car.get_total_travel_time_seconds(), config.DoorCloseTime + config.DoorOpenTime + config.TimeBetweenFloors);
+    const config = new MyConfig();
+
+    describe('Car construction', () => {
+        it('should throw an exception if an array is not provided', () => {
+            expect(() => {
+                new Car(1, "Not an array", config);
+            }).to.throw(Car.InvalidFloorsException);
         })
 
-        it('should have closing doors initially', () => {
-            const car = new Car(1, 3, config);
-            assert.isTrue(car.is_door_closing());
+        it('should throw an exception if a proper MyConfig is not provided', () => {
+            expect(() => {
+                new Car(1, [1, 2, 3], "Not a Config");
+            }).to.throw(Car.InvalidConfigExcpetion);
         })
     })
 
+    describe('Itinerary', () => {
+        it ('should have a journey of no time if an empty array of floors is provided', () => {
+            const car = new Car(1, [], config);
+            car.run();
+            assert.equal(car.get_total_travel_time(), 0);
+         //   expect(car.get_floors_visited).to.eql([1]);
+        })
+    })
 })

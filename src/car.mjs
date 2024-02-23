@@ -1,59 +1,75 @@
 import { MyConfig } from "./config.mjs";
-
+import { Leg } from "./leg.mjs";
+import { Display } from "./display.mjs";
 /**
  * Describes an elevator car
  */
 export class Car {
 
-    /**
-     * 
-     * @param {Number} last_floor - The most recently departed floor
-     * @param {Number} next_floor - The next floor the car will travel to
-     * @param {MyConfig} config - Config parameters that includes time
-     */
-    constructor(last_floor, next_floor, config) {
-        this.last_floor = last_floor;
-        this.next_floor = next_floor;
-        this.elapsed_seconds = 0;
-        this.travel_seconds = Math.abs(this.next_floor - this.last_floor) * config.TimeBetweenFloors + config.DoorCloseTime + config.DoorOpenTime;
-        this.door_closing_time = config.DoorCloseTime;
-        this.door_opening = this.travel_seconds - config.DoorOpenTime;
+    static InvalidFloorsException = "Please provide a valid array of floors to travel to";
+    static InvalidConfigExcpetion = "Please provide a valid configuration";
+
+    constructor(current_floor, floors_to_visit, config) {
+
+        if (!Array.isArray(floors_to_visit)) {
+            throw Car.InvalidFloorsException;
+        }
+
+        if (config instanceof MyConfig == false) {
+            throw Car.InvalidConfigExcpetion;
+        }
+
+        this._floors_visited = [];
+        this._floors_to_visit = floors_to_visit;
+        this._last_floor = current_floor;
+        this._total_travel_time = 0;
+        this._config = config;
     }
 
-    /**
-     * 
-     * @returns true when the elevator car's doors are closing
-     */
-    is_door_closing() {
-        return this.elapsed_seconds < this.door_closing_time;
+    async run() {
+
+        this._floors_visited.push(this._last_floor);
+
+        if (Array.isArray(this._floors_to_visit)) {
+
+            if (this._floors_to_visit.length == 0) {
+                // Edge case where no destination floors are provided
+                const leg = new Leg(this._last_floor, this._last_floor, this._config);
+                Display.print_output(leg, 0, this._floors_visited);
+            } else {
+                while (this._floors_to_visit.length) {
+                    const next_floor = this._floors_to_visit.shift();
+                    if (next_floor == this._last_floor) {
+                        continue;
+                    }
+                    const leg = new Leg(this._last_floor, next_floor, this._config);
+
+                    while (leg.get_remaining_seconds() > 0) {
+                        Display.print_output(leg, this._total_travel_time, this._floors_visited);
+
+                        await new Promise((resolve) => setTimeout(() => {
+                            resolve();
+                        }, 1000 * MyConfig.TimeScale));
+
+                        leg.increment();
+                        ++this._total_travel_time;
+                    }
+                    this._last_floor = next_floor;
+                    this._floors_visited.push(this._last_floor);
+                    Display.print_output(leg, this._total_travel_time, this._floors_visited);
+                }
+            }
+        }
     }
 
-    /**
-     * 
-     * @returns true when the elevator car's doors are opening
-     */
-    is_door_opening() {
-        return this.elapsed_seconds > this.door_opening;
+    get_total_travel_time() {
+        return this._total_travel_time;
     }
 
-    /**
-     * 
-     * @returns true when the elevator has reached the floor. 
-     * @description In practice, this will only be true after the last floor is reached
-     */
-    is_stopped() {
-        return this.elapsed_seconds >= this.travel_seconds;
-    }
-
-    /**
-     * 
-     * @returns true if the elevator car is not opening/closing its doors and it's not stopped
-     */
-    is_travelling() {
-        return !this.is_door_closing && !this.is_door_opening && !this.is_stopped;
-    }
-
-    get_total_travel_time_seconds() {
-        return this.travel_seconds;
+    get_floors_visited() {
+        return this._floors_visited();
     }
 }
+
+// TODO: check empty floors array
+// start to one floor which is the same
