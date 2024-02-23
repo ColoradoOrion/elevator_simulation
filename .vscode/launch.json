@@ -14,6 +14,9 @@
             "program": "${workspaceFolder}/main.mjs",
             "console": "internalConsole",
             "outputCapture": "std",
+            "args": [
+                "floors=1,2,4,5"
+            ]
         }
     ]
 }

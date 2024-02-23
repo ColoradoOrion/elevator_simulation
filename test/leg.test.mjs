@@ -25,7 +25,7 @@ describe('Leg', () => {
             const leg = new Leg(1, 3, config);
             for (let second = 0; second < config.DoorCloseTime + 2; ++second) {
 
-                if (second <= config.DoorCloseTime) {
+                if (second < config.DoorCloseTime) {
                     assert.isTrue(leg.is_door_closing(), `In Close time: ${second} vs. config of ${config.DoorCloseTime}. Elapsed is ${leg.get_elapsed_time()}`);
                 } else {
                     assert.isFalse(leg.is_door_closing(), `Past close time: ${second} vs. config of ${config.DoorCloseTime}. Elapsed is ${leg.get_elapsed_time()}`);

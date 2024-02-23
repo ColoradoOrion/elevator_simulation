@@ -35,7 +35,7 @@ export class Leg {
      * @returns true when the elevator car's doors are closing
      */
     is_door_closing() {
-        return this.journey_time > 0 && this.elapsed_seconds <= this.door_closing_time;
+        return this.journey_time > 0 && this.elapsed_seconds < this.door_closing_time;
     }
 
     /**

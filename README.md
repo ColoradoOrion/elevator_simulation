@@ -24,6 +24,12 @@ From the command prompt, run
 
 Pressing any key will abort the simulation.
 
+### Configuration
+
+- To speed things up, you can adjust `TimeScale` value in `src/config.mjs`.
+    - 2 means twice as fast as real time.
+    - .5 means twice as slow as real time. 0.5 is the smallest value permitted.
+
 ### Output
 
     <indicator> Time: <elapsed travel time>s Floors: <floors visited>
@@ -37,6 +43,12 @@ Pressing any key will abort the simulation.
 | Indicator `[ ]` | Car stopped with doors open |
 | `elapsed travel time` | The travel time of the elevator car in seconds |
 | `floors visited` | A comma-separated list of floors that the elevator car has stopped at |
+
+## Unit tests
+
+Tests are located in the `/test` folder. Run them by entering:
+
+    npm test
 
 ## Assumptions
 - The "simulation" is a real time elevator experience i.e. we are not simply calculating the time travelled and displaying a list of floors visited.
@@ -63,6 +75,7 @@ Pressing any key will abort the simulation.
 - Time for passengers to embark and disembark. This is stubbed with a time of zero seconds.
 - Realtime car location. Based on the requirements, the output only displays the floors the car stops at as it arrives at each one.
 - Summoning the elevator from another floor.
+- Showing the current floor when the doors open and close.
 - Acceleration and desceleration of the elevator car as it arrives/departs. In a more precise simulation, the car will descelerate as it approaches and accelerates as it departs from each stop.
 - Allowing floors to be defined with characters such as "L" (lobby), "B" (basement), "G" (garage), etc.
 - Varying speed of the elevator as it's affected by weight.
