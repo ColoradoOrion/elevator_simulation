@@ -30,7 +30,7 @@ Pressing any key will abort the simulation.
 
 | Output | Description |
 |--------|-----------|
-| Indicator ` ><` |  Doors closing |
+| Indicator `> <` |  Doors closing |
 | Indicator `< >` | Doors opening |
 | Indicator `^` | Car climbing |
 | Indicator `v` | Car descending |

@@ -8,5 +8,5 @@ export class MyConfig {
 
     TimeBetweenFloors = 10;
 
-    static TimeScale = .5; 
+    static TimeScale = .25; 
 }

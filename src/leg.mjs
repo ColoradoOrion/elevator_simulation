@@ -80,14 +80,17 @@ export class Leg {
     }
 
     get_indicator() {
-        if (this.is_travelling()) {
+        if (this.leg_complete()) {
+            return '[ ]';
+        }
+        else if (this.is_travelling()) {
             if (this.next_floor > this.last_floor) {
                 return ' ^ ';
             } else if (this.next_floor < this.last_floor) {
                 return ' v ';
             }
         } if (this.is_door_closing()) {
-            return ' ><';
+            return '> <';
         } else if (this.is_door_opening()) {
             return '< >';
         } else {

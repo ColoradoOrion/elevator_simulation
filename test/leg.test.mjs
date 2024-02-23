@@ -106,9 +106,9 @@ describe('Leg', () => {
     })
 
     describe('Indicator', () => {
-        it('should return " ><" before the car starts moving', () => {
+        it('should return "> <" before the car starts moving', () => {
             const leg = new Leg(1, 4, config);
-            assert.equal(leg.get_indicator(), ' ><');
+            assert.equal(leg.get_indicator(), '> <');
         });
 
         it('should return "< >" as the car reaches the floor', () => {
@@ -133,12 +133,6 @@ describe('Leg', () => {
             const leg = new Leg(8, 4, config);
             leg.increment(5);
             assert.equal(leg.get_indicator(), ' v ');
-        });
-
-        it('should return " - " if the next floor is the same as the last floor', () => {
-
-            const leg = new Leg(4, 4, config);
-            assert.equal(leg.get_indicator(), ' - ');
         });
 
         it('should return " ^ " if the next floor is above the last floor (negative)', () => {

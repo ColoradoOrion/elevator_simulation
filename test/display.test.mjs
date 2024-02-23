@@ -11,7 +11,7 @@ describe('Display', () => {
         it('should display no elapsed time and the initial floor', () => {
             const leg = new Leg(1, 3, config);
             const output = Display.get_output(leg, 0, []);
-            assert.equal(output, ' ><\tTime: 0s\tFloors: ');
+            assert.equal(output, '> <\tTime: 0s\tFloors: ');
         })
 
         it('should display ellapsed time and starting floor immediately after departure', () => {
