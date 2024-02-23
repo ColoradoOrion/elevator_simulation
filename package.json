@@ -1,0 +1,18 @@
+{
+  "name": "elevator",
+  "version": "1.0.0",
+  "description": "An elevator simulation that measures the time of an elevator car between floors and a record of the floors visited",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha -r esm"
+  },
+  "author": "Andrew Harrington",
+  "license": "ISC",
+  "devDependencies": {
+    "mocha": "^10.3.0"
+  },
+  "dependencies": {
+    "chai": "^5.1.0",
+    "esm": "^3.2.25"
+  }
+}
