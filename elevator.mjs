@@ -25,6 +25,7 @@ let total_travel_time = 0;
         process.exit();
     });
     if (process.stdin.isTTY) {
+        // This won't run in debug mode
         process.stdin.setRawMode(true);
     }
 
@@ -42,8 +43,6 @@ let total_travel_time = 0;
     // start is an integer
     // start is in bounds
 
-
-
     floors_visited.push(last_floor);
 
     while (floors_to_visit.length) {
@@ -58,13 +57,11 @@ let total_travel_time = 0;
 
         // we reached the floor
 
-        let travel_time_remaining = Math.abs(next_floor - last_floor) * MyConfig.TimeBetweenFloors;
+        let travel_time_remaining = Math.abs(next_floor - last_floor) * MyConfig.TimeBetweenFloors + MyConfig.DoorCloseTime + MyConfig.DoorOpenTime;
 
+        // travelling
         while (travel_time_remaining > 0) {
             Display.print_output(last_floor, next_floor, total_travel_time, floors_visited);
-
-            // check for keypress
-            // stop
 
             await new Promise((resolve) => setTimeout(() => {
                 resolve();

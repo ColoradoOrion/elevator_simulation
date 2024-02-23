@@ -1,8 +1,8 @@
 import { Display } from '../src/display.mjs';
 import { assert } from 'chai';
 
-describe('Display', function () {
-    describe('Indicator', function () {
+describe('Display', () => {
+    describe('Indicator', () => {
         it('should return " ^ " if the next floor is above the last floor', () => {
 
             const indicator = Display.get_indicator(1, 4);
@@ -34,7 +34,7 @@ describe('Display', function () {
         });
     });
 
-    describe('Output', function () {
+    describe('Output', () => {
         it('should display no elapsed time and the initial floor', () => {
             const output = Display.get_output(1, 3, 0, []);
             assert.equal(output, ' ^ \tTime: 0s\tFloors: ');

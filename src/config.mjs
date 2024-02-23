@@ -3,11 +3,10 @@ export class MyConfig {
 
     }
 
-    works() {
-        return true;
-    }
+    DoorCloseTime = 4;
+    DoorOpenTime = 4;
 
-    static TimeBetweenFloors = 2;
+    TimeBetweenFloors = 2;
 
     static RunScale = .25; 
 }
