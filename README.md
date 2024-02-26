@@ -26,9 +26,17 @@ Pressing any key will abort the simulation.
 
 ### Configuration
 
-- To speed things up, you can adjust `TimeScale` value in `src/config.mjs`.
-    - 2 means twice as fast as real time.
-    - .5 means twice as slow as real time. 0.5 is the smallest value permitted.
+Configuration values can be found in `src/config.mjs`
+
+| Value | Description |
+|--------|-----------|
+| `DoorCloseTime` | The duration in seconds it takes for the doors to close before the car starts moving |
+| `DoorOpenTime` | The duration in seconds it takes for the doors to open after the car arrives at a destination floor |
+| `MaxFloor` | The maximum floor of the building. If a staring floor or floor to visit exceeds this value, the 
+| `MinFloor` | The minimum floor of the building. If a staring floor or floor to visit is less than this value, the simulation will not be run |simulation will not be run |
+| `TimeScale` | To adjust the speed of the simulation. 2 means twice as fast as real time..5 means twice as slow as real time. 0.5 is the smallest value permitted. |
+| `TimeBetweenFloors` | The duration in seconds the car takes to travel between two consecutive floors. |
+
 
 ### Output
 
@@ -63,8 +71,8 @@ Tests are located in the `/test` folder. Run them by entering:
     - Floor 1 is assumed to be the ground floor.
     - Negative floors are assumed to be subterranean.
     - The zero floor is probably the first basement floor. I'm trying not to overthink this.
-- It takes 4 seconds for the doors to close before the car departs from a stop.
-- It takes 4 seconds for the doors to open after the car arrives at a stop.
+- It takes 4 seconds (configurable) for the doors to close before the car departs from a stop.
+- It takes 4 seconds (configurable) for the doors to open after the car arrives at a stop.
 - The doors are assumed to be opened at the beginning and end of the simulation.
 - Floors can be visited more than once.
 - If the same floor is provided consecutively, zero time is assumed. i.e. The doors do not open and close. Subsequent identical floors are essentially skipped.
@@ -74,8 +82,9 @@ Tests are located in the `/test` folder. Run them by entering:
 ## Features that were not implemented
 - Time for passengers to embark and disembark. This is stubbed with a time of zero seconds.
 - Realtime car location. Based on the requirements, the output only displays the floors the car stops at as it arrives at each one.
-- Summoning the elevator from another floor.
-- Showing the current floor when the doors open and close.
+- Waiting for an elevator car if summoned from another floor.
+- Showing the current floor as the doors open and close.
+- Configuration of the appliation using environment variables or parameters. They are set in `src/config.mjs` as a quick-n-dirty implementation.
 - Acceleration and desceleration of the elevator car as it arrives/departs. In a more precise simulation, the car will descelerate as it approaches and accelerates as it departs from each stop.
 - Allowing floors to be defined with characters such as "L" (lobby), "B" (basement), "G" (garage), etc.
 - Varying speed of the elevator as it's affected by weight.
