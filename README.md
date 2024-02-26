@@ -32,8 +32,8 @@ Configuration values can be found in `src/config.mjs`
 |--------|-----------|
 | `DoorCloseTime` | The duration in seconds it takes for the doors to close before the car starts moving |
 | `DoorOpenTime` | The duration in seconds it takes for the doors to open after the car arrives at a destination floor |
-| `MaxFloor` | The maximum floor of the building. If a staring floor or floor to visit exceeds this value, the 
-| `MinFloor` | The minimum floor of the building. If a staring floor or floor to visit is less than this value, the simulation will not be run |simulation will not be run |
+| `MaxFloor` | The maximum floor of the building. If a staring floor or floor to visit exceeds this value, the simulation will not be run |
+| `MinFloor` | The minimum floor of the building. If a staring floor or floor to visit is less than this value, the simulation will not be run |
 | `TimeScale` | To adjust the speed of the simulation. 2 means twice as fast as real time..5 means twice as slow as real time. 0.5 is the smallest value permitted. |
 | `TimeBetweenFloors` | The duration in seconds the car takes to travel between two consecutive floors. |
 
